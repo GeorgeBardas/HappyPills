@@ -7,6 +7,12 @@ steps:
         path: '/persistent_volume'
     args: ['cp', '-a', '.', '/persistent_volume']
 
+  - name: 'gcr.io/cloud-builders/docker'
+      volumes:
+        - name: 'vol1'
+          path: '/persistent_volume'
+      args: ['run', '--help']
+
   # Build APK with Gradle Image from mounted /persistent_volume using name: vol1
   - name: 'gcr.io/cloud-builders/docker'
     volumes:
