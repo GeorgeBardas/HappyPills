@@ -8,4 +8,23 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PillViewStyleTitle">
+        <item name="android:textSize">@dimen/pill_title_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="PillViewStyleQuantity">
+        <item name="android:textSize">@dimen/pill_quantity_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PillViewStyleButton">
+        <item name="android:textSize">@dimen/pill_quantity_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
 </resources>

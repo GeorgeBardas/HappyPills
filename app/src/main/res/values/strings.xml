@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">HappyPills</string>
-    <string name="title_home">Home</string>
+    <string name="title_pills">Pills</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!--  Views tool text  -->
+    <string name="text_pill_title">Pastila</string>
+    <string name="text_pill_quantity">21 pills left</string>
+
+    <string name="pill_view_quantity_text">%1$d PILLS LEFT</string>
+
+
 </resources>
