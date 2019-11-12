@@ -5,16 +5,45 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="PillViewStyleTitle">
+        <item name="android:textSize">@dimen/pill_title_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="PillViewStyleQuantity">
+        <item name="android:textSize">@dimen/pill_quantity_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="PillViewStyleButton">
+        <item name="android:textSize">@dimen/pill_quantity_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="DoctorViewStyleName">
+        <item name="android:textSize">@dimen/doctor_name_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DoctorViewStylePhone">
+        <item name="android:textSize">@dimen/doctor_phone_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto_thin</item>
+    </style>
+
+    <style name="DoctorViewStyleSpecialization">
+        <item name="android:textSize">@dimen/doctor_phone_size</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/roboto_thin</item>
+    </style>
 
 </resources>
