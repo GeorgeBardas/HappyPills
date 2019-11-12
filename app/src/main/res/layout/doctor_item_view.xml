@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/doctor_item_view_height"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="@dimen/doctor_item_view_padding_sides"
+        android:layout_marginRight="@dimen/doctor_item_view_padding_sides"
+        android:layout_marginTop="@dimen/doctor_item_view_padding"
+        android:layout_marginBottom="@dimen/doctor_item_view_padding"
+        android:background="@drawable/rounded_bg">
+
+        <TextView
+            android:id="@+id/doctor_name"
+            style="@style/DoctorViewStyleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/text_doctor_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="@dimen/doctor_elements_padding_top_bottom"
+            android:layout_marginStart="@dimen/doctor_elements_padding_left_right"/>
+
+        <TextView
+            android:id="@+id/doctor_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/text_doctor_phone"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/doctor_elements_padding_top_bottom"
+            android:layout_marginEnd="@dimen/doctor_elements_padding_left_right"
+            style="@style/DoctorViewStylePhone"/>
+
+        <TextView
+            android:id="@+id/doctor_specialization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/text_doctor_specialization"
+            style="@style/DoctorViewStyleSpecialization"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="@dimen/doctor_elements_padding_left_right"
+            android:layout_marginBottom="@dimen/doctor_elements_padding_top_bottom"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/call_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_call_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="@dimen/doctor_elements_padding_top_bottom"
+            android:layout_marginEnd="@dimen/doctor_elements_padding_left_right"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/message_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_msg_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/call_button"
+            android:layout_marginBottom="@dimen/doctor_elements_padding_top_bottom"
+            android:layout_marginEnd="@dimen/doctor_message_button_paddin_right"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,9 +6,9 @@ import com.happypills.objects.Pill
 
 class PillsRepository {
 
-    fun getPills() : MutableLiveData<List<Pill>> {
+    fun getPills(): MutableLiveData<List<Pill>> {
         val list = MutableLiveData<List<Pill>>()
-        var listOfPills = mutableListOf<Pill>()
+        val listOfPills = mutableListOf<Pill>()
         listOfPills.add(Pill("Test", 2))
         listOfPills.add(Pill("Test", 3))
         listOfPills.add(Pill("Test", 10))

@@ -6,12 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.happypills.R
 import com.happypills.objects.Pill
 
-class PillListGridRecyclerView : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PillListGridRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var pillsList = listOf<Pill>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PillListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.pill_item_view, parent, false))
+        return PillListViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.pill_item_view, parent, false)
+        )
     }
 
     override fun getItemCount(): Int = pillsList.size
@@ -21,7 +24,7 @@ class PillListGridRecyclerView : RecyclerView.Adapter<RecyclerView.ViewHolder>()
         pillViewHolder.bindView(context = holder.itemView.context, pill = pillsList[position])
     }
 
-    fun setPillsList(pills: List<Pill>){
+    fun setPillsList(pills: List<Pill>) {
         this.pillsList = pills
         notifyDataSetChanged()
     }

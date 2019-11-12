@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">HappyPills</string>
     <string name="title_pills">Pills</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_doctors">Doctors</string>
     <string name="title_notifications">Notifications</string>
 
     <!--  Views tool text  -->
     <string name="text_pill_title">Pastila</string>
     <string name="text_pill_quantity">21 pills left</string>
+    <string name="text_doctor_name">Johnny Ive</string>
+    <string name="text_doctor_phone">+40 756 154 650</string>
+    <string name="text_doctor_specialization">Dentist</string>
 
     <string name="pill_view_quantity_text">%1$d PILLS LEFT</string>
 

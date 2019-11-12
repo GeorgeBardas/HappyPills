@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_pills" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.happypills.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_doctors"
+        android:name="com.happypills.ui.doctors.DoctorsFragment"
+        android:label="@string/title_doctors"
+        tools:layout="@layout/fragment_doctors" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.happypills.ui.notifications.NotificationsFragment"
+        android:name="com.happypills.ui.dashboard.DashboardFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_dashboard" />
 </navigation>

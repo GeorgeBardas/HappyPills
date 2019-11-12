@@ -2,6 +2,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="fab_padding">20dp</dimen>
+
     <dimen name="pill_item_view_height">120dp</dimen>
     <dimen name="pill_item_view_width">150dp</dimen>
     <dimen name="pill_item_padding">10dp</dimen>
@@ -11,5 +13,15 @@
     <dimen name="pill_quantity_size">10sp</dimen>
     <dimen name="pill_border_radius">10dp</dimen>
     <dimen name="pill_button_size">20dp</dimen>
+
+    <dimen name="doctor_item_view_height">90dp</dimen>
+    <dimen name="doctor_item_view_padding">10dp</dimen>
+    <dimen name="doctor_item_view_padding_sides">20dp</dimen>
+    <dimen name="doctor_elements_padding_top_bottom">15dp</dimen>
+    <dimen name="doctor_elements_padding_left_right">20dp</dimen>
+    <dimen name="doctor_message_button_paddin_right">30dp</dimen>
+    <dimen name="doctor_name_size">16sp</dimen>
+    <dimen name="doctor_phone_size">16sp</dimen>
+    <dimen name="doctor_specialization_size">16sp</dimen>
 
 </resources>
