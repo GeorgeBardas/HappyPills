@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#59e194</color>
-    <color name="colorPrimaryDark">#59E194</color>
-    <color name="colorAccent">#FF4081</color>
-
-    <color name="no_pills_color">#E15959</color>
-    <color name="under_4">#E18F59</color>
-    <color name="over_4">#393939</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
 </resources>
