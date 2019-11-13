@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.happypills.R
@@ -26,18 +27,27 @@ class PillsFragment : Fragment() {
         pillsViewModel =
             ViewModelProviders.of(this).get(PillsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_pills, container, false)
-
-        setupRecyclerView(root)
-
         return root
     }
 
-    private fun setupRecyclerView(view: View?) {
-        view?.let {
-            recyclerView = it.pills_recycler_view
-            recyclerView.layoutManager = GridLayoutManager(context, 2)
-            recyclerView.adapter = recyclerViewAdapter
-            recyclerViewAdapter.setPillsList(pillsViewModel.pillsList.value!!)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        setupView()
+    }
+
+    private fun setupRecyclerView() {
+        view?.let { recyclerView = it.pills_recycler_view }
+        recyclerView.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = recyclerViewAdapter
+        }
+        recyclerViewAdapter.setPillsList(pillsViewModel.pillsList.value!!)
+    }
+
+    private fun setupView(){
+        view?.add_pill_button?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_pills_to_addPillFragment)
         }
     }
 

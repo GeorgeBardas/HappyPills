@@ -9,17 +9,44 @@
         android:id="@+id/navigation_pills"
         android:name="com.happypills.ui.pills.PillsFragment"
         android:label="@string/title_pills"
-        tools:layout="@layout/fragment_pills" />
+        tools:layout="@layout/fragment_pills" >
+        <action
+            android:id="@+id/action_navigation_pills_to_addPillFragment"
+            app:destination="@id/addPillFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_doctors"
         android:name="com.happypills.ui.doctors.DoctorsFragment"
         android:label="@string/title_doctors"
-        tools:layout="@layout/fragment_doctors" />
+        tools:layout="@layout/fragment_doctors" >
+        <action
+            android:id="@+id/action_navigation_doctors_to_addDoctorFragment"
+            app:destination="@id/addDoctorFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.happypills.ui.dashboard.DashboardFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/addPillFragment"
+        android:name="com.happypills.ui.pills.addpill.AddPillFragment"
+        android:label="fragment_add_pill"
+        tools:layout="@layout/fragment_add_pill" />
+    <fragment
+        android:id="@+id/addDoctorFragment"
+        android:name="com.happypills.ui.doctors.adddoctor.AddDoctorFragment"
+        android:label="fragment_add_doctor"
+        tools:layout="@layout/fragment_add_doctor" />
+
 </navigation>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_doctors.view.*
 class DoctorsFragment : Fragment() {
 
     private lateinit var doctorsViewModel: DoctorsViewModel
-    private lateinit var root: View
     private var recyclerViewAdapter = DoctorListRecyclerViewAdapter()
     private lateinit var recyclerView: RecyclerView
 
@@ -25,23 +25,32 @@ class DoctorsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        doctorsViewModel =
-            ViewModelProviders.of(this).get(DoctorsViewModel::class.java)
-        root = inflater.inflate(R.layout.fragment_doctors, container, false)
+        doctorsViewModel = ViewModelProviders.of(this).get(DoctorsViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_doctors, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setup()
         setupRecyclerView()
 
-        return root
     }
 
     private fun setupRecyclerView() {
-        recyclerView = root.doctors_recycler_view
+        view?.let { recyclerView = it.doctors_recycler_view }
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerViewAdapter
         }
         doctorsViewModel.doctorsList.value?.let {
             recyclerViewAdapter.setDoctorsList(doctorsViewModel.doctorsList.value!!)
+        }
+    }
+
+    private fun setup(){
+        view?.add_doctor_button?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_doctors_to_addDoctorFragment)
         }
     }
 
