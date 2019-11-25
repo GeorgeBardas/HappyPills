@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.happypills.R
 import com.happypills.ui.doctors.utils.DoctorListRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_doctors.*
 import kotlinx.android.synthetic.main.fragment_doctors.view.*
 
 class DoctorsFragment : Fragment() {
@@ -43,8 +44,13 @@ class DoctorsFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerViewAdapter
         }
-        doctorsViewModel.doctorsList.value?.let {
-            recyclerViewAdapter.setDoctorsList(doctorsViewModel.doctorsList.value!!)
+        doctorsViewModel.doctorsList.observeForever {
+            if (it.isEmpty())
+                doctors_empty_state?.visibility = View.VISIBLE
+            else {
+                doctors_empty_state?.visibility = View.GONE
+                recyclerViewAdapter.setDoctorsList(it)
+            }
         }
     }
 

@@ -6,12 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.happypills.R
-import kotlinx.android.synthetic.main.fragment_add_pill.view.*
-import kotlinx.android.synthetic.main.fragment_doctors.view.*
+import com.happypills.objects.Doctor
+import com.happypills.util.Util
+import kotlinx.android.synthetic.main.fragment_add_doctor.*
 
 class AddDoctorFragment : Fragment() {
+
+    private lateinit var addDoctorViewModel: AddDoctorViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,19 +24,36 @@ class AddDoctorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        addDoctorViewModel = ViewModelProviders.of(this).get(AddDoctorViewModel::class.java)
         setup()
     }
 
     private fun setup() {
-        view?.cancel_button?.setOnClickListener {
+        cancel_button?.setOnClickListener {
             view?.clearFocus()
             findNavController().popBackStack()
         }
 
-        view?.add_doctor_button?.setOnClickListener {
+        add_doctor_button?.setOnClickListener {
+            addDoctorViewModel.inserDoctor(
+                Doctor(
+                    doctor_name?.editText?.text.toString(),
+                    doctor_specialization?.editText?.text.toString(),
+                    doctor_phone?.editText?.text.toString()
+                )
+            )
             view?.clearFocus()
+            findNavController().popBackStack()
         }
+
+        doctor_name?.editText?.addTextChangedListener(Util().getTextWatcher(doctor_name))
+        doctor_specialization?.editText?.addTextChangedListener(
+            Util().getTextWatcher(
+                doctor_specialization
+            )
+        )
+        doctor_phone?.editText?.addTextChangedListener(Util().getTextWatcher(doctor_phone))
+
     }
 
 }

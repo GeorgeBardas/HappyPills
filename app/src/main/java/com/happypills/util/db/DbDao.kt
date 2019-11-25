@@ -1,18 +1,26 @@
 package com.happypills.util.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.happypills.objects.Doctor
 import com.happypills.objects.Pill
 
 @Dao
 interface DbDao {
 
-    @Query("SELECT * from pills_table")
-    fun getPills(): List<Pill>
+    @Query("SELECT * from pillsTable")
+    fun getPills(): LiveData<List<Pill>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPill(pill: Pill)
+
+    @Query("SELECT * from doctorsTable")
+    fun getDoctors(): LiveData<List<Doctor>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertDoctor(doctor: Doctor)
 
 }

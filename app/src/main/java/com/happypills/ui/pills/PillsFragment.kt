@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.happypills.R
+import com.happypills.objects.Pill
 import com.happypills.ui.pills.utils.PillListGridRecyclerViewAdapter
+import kotlinx.android.synthetic.main.fragment_doctors.*
+import kotlinx.android.synthetic.main.fragment_pills.*
 import kotlinx.android.synthetic.main.fragment_pills.view.*
 
 class PillsFragment : Fragment() {
@@ -26,8 +30,7 @@ class PillsFragment : Fragment() {
     ): View? {
         pillsViewModel =
             ViewModelProviders.of(this).get(PillsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_pills, container, false)
-        return root
+        return inflater.inflate(R.layout.fragment_pills, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +45,14 @@ class PillsFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 2)
             adapter = recyclerViewAdapter
         }
-        recyclerViewAdapter.setPillsList(pillsViewModel.pillsList.value!!)
+        pillsViewModel.pillsList.observeForever {
+            if (it.isEmpty())
+                pills_empty_state?.visibility = View.VISIBLE
+            else {
+                pills_empty_state?.visibility = View.GONE
+                recyclerViewAdapter.setPillsList(it)
+            }
+        }
     }
 
     private fun setupView(){
