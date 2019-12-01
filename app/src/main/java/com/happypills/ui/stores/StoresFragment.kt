@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -17,12 +19,15 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.gson.GsonBuilder
 import com.happypills.MainActivity
 import com.happypills.R
 import com.happypills.objects.Pill
 import com.happypills.objects.Store
+import com.happypills.ui.stores.util.StoreRecyclerViewAdapter
 import com.happypills.util.googleplaces.VolleyService
+import kotlinx.android.synthetic.main.fragment_stores.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -31,15 +36,17 @@ import org.json.JSONObject
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
-class StoresFragment : Fragment(), OnMapReadyCallback, Response.Listener<JSONObject>,
-    Response.ErrorListener {
+class StoresFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var storesViewModel: StoresViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var googleMap: GoogleMap? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var storeRecyclerViewAdapter: StoreRecyclerViewAdapter
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
+        private const val DEFAULT_ZOOM = 15
     }
 
     override fun onCreateView(
@@ -55,28 +62,33 @@ class StoresFragment : Fragment(), OnMapReadyCallback, Response.Listener<JSONObj
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val mapFragment = childFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        setupRecyclerView()
     }
 
     private fun updateMyLocation() {
-        googleMap?.isMyLocationEnabled = true
+        googleMap?.apply {
+            isMyLocationEnabled = true
+            uiSettings?.apply {
+                isZoomGesturesEnabled = true
+                isZoomControlsEnabled = true
+            }
+        }
         fusedLocationClient.lastLocation.addOnSuccessListener {
             googleMap?.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
-                    LatLng(
-                        it.latitude,
-                        it.longitude
-                    ), 15.toFloat()
+                    LatLng(it.latitude, it.longitude),
+                    DEFAULT_ZOOM.toFloat()
                 )
             )
-            GlobalScope.launch(Dispatchers.IO) { getData(it) }
+            GlobalScope.launch(Dispatchers.IO) { storesViewModel.getData(context, it) }
         }
     }
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let { googleMap = it }
+        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.map_style));
         updateMap()
     }
 
@@ -92,7 +104,7 @@ class StoresFragment : Fragment(), OnMapReadyCallback, Response.Listener<JSONObj
             EasyPermissions.requestPermissions(
                 this,
                 "",
-                1,
+                LOCATION_PERMISSION_REQUEST_CODE,
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             )
     }
@@ -106,23 +118,19 @@ class StoresFragment : Fragment(), OnMapReadyCallback, Response.Listener<JSONObj
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onResponse(response: JSONObject?) {
-        val stores = GsonBuilder()
-            .create()
-            .fromJson(response?.getJSONArray("results").toString(), Array<Store>::class.java).toList()
-    }
-
-    override fun onErrorResponse(error: VolleyError?) {
-        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
-    }
-
-    fun getData(it: Location) {
-        context?.let { ctx ->
-            VolleyService.getInstance(ctx).getNearStores(it.longitude, it.latitude,this, this)
-        }
-    }
-
     private fun setupRecyclerView(){
-    }
+        recyclerView = store_list
+        val listStores = mutableListOf<Store>()
+        storesViewModel.locationsList.observeForever {
+            listStores.clear()
+            listStores.addAll(it)
+        }
+        storeRecyclerViewAdapter = StoreRecyclerViewAdapter(listStores)
+        recyclerView.adapter = storeRecyclerViewAdapter
 
+        storesViewModel.locationsList.observeForever {
+            storeRecyclerViewAdapter.notifyDataSetChanged()
+        }
+        recyclerView.layoutManager = LinearLayoutManager(context)
+    }
 }
