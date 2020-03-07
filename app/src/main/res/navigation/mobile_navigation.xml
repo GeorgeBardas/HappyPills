@@ -40,12 +40,6 @@
         tools:layout="@layout/fragment_stores" />
 
     <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.happypills.ui.stores.StoresFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_stores" />
-
-    <fragment
         android:id="@+id/addPillFragment"
         android:name="com.happypills.ui.pills.addpill.AddPillFragment"
         android:label="fragment_add_pill"
@@ -55,5 +49,11 @@
         android:name="com.happypills.ui.doctors.adddoctor.AddDoctorFragment"
         android:label="fragment_add_doctor"
         tools:layout="@layout/fragment_add_doctor" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.happypills.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
 
 </navigation>

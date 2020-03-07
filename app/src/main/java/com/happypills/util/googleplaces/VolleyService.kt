@@ -13,8 +13,7 @@ import org.json.JSONObject
 class VolleyService constructor(val context: Context) {
     companion object {
 
-        val BASE_PATH_GOOGLE_PLACES =
-            "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+        val BASE_PATH_GOOGLE_PLACES = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
         val SEARCH_RADIUS = 7500
         val SEARCH_TYPE = "drugstore"
 

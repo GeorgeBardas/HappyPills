@@ -49,6 +49,7 @@
             android:paddingBottom="20dp">
             
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/add_pill_button"
                 android:layout_width="@dimen/pill_button_size"
                 android:layout_height="@dimen/pill_button_size"
                 android:background="@drawable/pill_button_bg"
@@ -69,6 +70,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/minus_pill_button"
                 android:layout_width="@dimen/pill_button_size"
                 android:layout_height="@dimen/pill_button_size"
                 android:background="@drawable/pill_button_bg"
@@ -90,6 +92,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/info_pill_button"
                 android:layout_width="@dimen/pill_button_size"
                 android:layout_height="@dimen/pill_button_size"
                 android:background="@drawable/pill_button_bg"

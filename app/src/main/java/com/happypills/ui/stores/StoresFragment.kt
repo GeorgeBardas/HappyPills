@@ -94,19 +94,21 @@ class StoresFragment : Fragment(), OnMapReadyCallback {
 
     @AfterPermissionGranted(LOCATION_PERMISSION_REQUEST_CODE)
     private fun updateMap() {
-        if (EasyPermissions.hasPermissions(
-                context!!,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        ) {
-            updateMyLocation()
-        } else
-            EasyPermissions.requestPermissions(
-                this,
-                "",
-                LOCATION_PERMISSION_REQUEST_CODE,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
+        context?.let {
+            if (EasyPermissions.hasPermissions(
+                    it,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                updateMyLocation()
+            } else
+                EasyPermissions.requestPermissions(
+                    this,
+                    "",
+                    LOCATION_PERMISSION_REQUEST_CODE,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                )
+        }
     }
 
     override fun onRequestPermissionsResult(

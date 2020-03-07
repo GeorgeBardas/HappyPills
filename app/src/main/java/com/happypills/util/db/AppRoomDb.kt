@@ -26,7 +26,9 @@ abstract class AppRoomDb : RoomDatabase() {
                     context.applicationContext,
                     AppRoomDb::class.java,
                     "happypills_db"
-                ).build()
+                )
+                    .allowMainThreadQueries()
+                    .build()
                 INSTANCE = instance
                 return instance
             }

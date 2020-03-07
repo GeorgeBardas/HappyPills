@@ -1,10 +1,7 @@
 package com.happypills.util.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.happypills.objects.Doctor
 import com.happypills.objects.Pill
 
@@ -22,5 +19,11 @@ interface DbDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDoctor(doctor: Doctor)
+
+    @Update
+    suspend fun updatePill(pill: Pill)
+
+    @Delete
+    suspend fun deletePill(pill: Pill)
 
 }
