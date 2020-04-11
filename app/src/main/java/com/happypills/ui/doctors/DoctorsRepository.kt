@@ -1,29 +1,11 @@
 package com.happypills.ui.doctors
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import com.happypills.objects.Doctor
+import com.happypills.util.db.DbDao
 
-class DoctorsRepository {
+class DoctorsRepository(private val dao: DbDao) {
 
-    fun getDoctors(): MutableLiveData<List<Doctor>> {
-        var list = MutableLiveData<List<Doctor>>()
-        val listOfDoctors = mutableListOf<Doctor>()
-
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-        listOfDoctors.add(Doctor(name = "Johnny Ive", phone = "+40 756 154 650", specialization = "Dentist"))
-
-        list.value = listOfDoctors
-        return list
-    }
+    fun getDoctors(): LiveData<List<Doctor>> = dao.getDoctors()
 
 }

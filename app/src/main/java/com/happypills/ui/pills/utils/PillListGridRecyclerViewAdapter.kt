@@ -6,9 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.happypills.R
 import com.happypills.objects.Pill
 
-class PillListGridRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PillListGridRecyclerViewAdapter(
+    private var clickListener: OnItemClickedListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var pillsList = listOf<Pill>()
+    private var pillsList: List<Pill> = listOf()
+    interface OnItemClickedListener {
+        fun plusButtonClicked(pill: Pill)
+        fun minusButtonClicked(pill: Pill)
+        fun infoButtonClicked(pill: Pill)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return PillListViewHolder(
@@ -21,7 +28,11 @@ class PillListGridRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHo
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val pillViewHolder = holder as PillListViewHolder
-        pillViewHolder.bindView(context = holder.itemView.context, pill = pillsList[position])
+        pillViewHolder.bindView(
+            context = holder.itemView.context,
+            pill = pillsList[position],
+            listener = clickListener
+        )
     }
 
     fun setPillsList(pills: List<Pill>) {
