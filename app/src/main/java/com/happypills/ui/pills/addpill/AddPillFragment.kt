@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.happypills.MainActivity
@@ -47,15 +48,50 @@ class AddPillFragment : Fragment() {
         }
 
         view?.add_pill_button?.setOnClickListener {
-            addPillViewModel.insertPill(getDataFromForm())
-            view?.clearFocus()
-            findNavController().popBackStack()
+            if (isFormValid()) {
+                addPillViewModel.insertPill(getDataFromForm())
+                view?.clearFocus()
+                findNavController().popBackStack()
+            } else {
+                Toast.makeText(context, "Some fields aren't filled...", Toast.LENGTH_SHORT).show()
+            }
         }
 
         initDatePicker()
-        view?.pill_name?.editText?.addTextChangedListener(Util().getTextWatcher(view?.pill_name))
-        view?.pill_quantity?.editText?.addTextChangedListener(Util().getNumberyWatcher(view?.pill_quantity))
-        view?.pill_commentary?.editText?.addTextChangedListener(Util().getTextWatcher(view?.pill_name))
+        fieldValidation()
+    }
+
+    private fun fieldValidation() {
+        view?.apply {
+            pill_name?.editText?.addTextChangedListener(Util().getTextWatcher(view?.pill_name))
+            pill_quantity?.editText?.addTextChangedListener(Util().getNumberyWatcher(view?.pill_quantity))
+            pill_commentary?.editText?.addTextChangedListener(Util().getTextWatcher(view?.pill_name))
+            pill_name?.editText?.setOnFocusChangeListener { _, b ->
+                if (!b) {
+                    pill_name?.editText?.text?.isEmpty()?.let {
+                        if (it) pill_name?.editText?.error = "Invalid characters..."
+                        else pill_name?.editText?.error = null
+                    } ?: kotlin.run { pill_name?.editText?.error = "Invalid characters..." }
+                }
+            }
+            pill_quantity?.editText?.setOnFocusChangeListener { _, b ->
+                if (!b) {
+                    pill_quantity?.editText?.text?.isEmpty()?.let {
+                        if (it) pill_quantity?.editText?.error = "Invalid characters..."
+                        else pill_quantity?.editText?.error = null
+                    } ?: kotlin.run { pill_quantity?.editText?.error = "Invalid characters..." }
+                }
+            }
+        }
+    }
+
+    private fun isFormValid(): Boolean {
+        view?.apply {
+            val isTitleEmpty = pill_name?.editText?.text?.isNotBlank()
+            val isQuantityValid = pill_quantity?.editText?.text?.isNotBlank()
+            return isTitleEmpty ?: false && isQuantityValid ?: false
+        }
+        return false
     }
 
     private fun initDatePicker() {

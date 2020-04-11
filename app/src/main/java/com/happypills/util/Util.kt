@@ -8,7 +8,10 @@ import java.util.regex.Pattern
 
 class Util {
 
-    private val MAX_QUANTITY = 1000
+    companion object {
+        const val BASIC_REGEX = "^[a-zA-Z0-9 ()*#!]*\$"
+        const val MAX_QUANTITY = 1000
+    }
 
     fun getTextWatcher(view: View?) : TextWatcher{
         return object : TextWatcher{

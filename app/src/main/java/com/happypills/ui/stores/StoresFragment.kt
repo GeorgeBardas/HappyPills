@@ -65,6 +65,7 @@ class StoresFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         setupRecyclerView()
+        setupErrorCase()
     }
 
     private fun updateMyLocation() {
@@ -134,5 +135,13 @@ class StoresFragment : Fragment(), OnMapReadyCallback {
             storeRecyclerViewAdapter.notifyDataSetChanged()
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun setupErrorCase() {
+        storesViewModel.locationsError.observeForever { state ->
+            error_locations?.visibility =
+                if (state) View.VISIBLE
+                else View.GONE
+        }
     }
 }

@@ -18,8 +18,7 @@
     <string name="settings_delete_doctors">Reset your doctors</string>
     <string name="settings_feedback">Send feedback</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="locations_error">Error on loading data…</string>
 
 
 </resources>

@@ -26,4 +26,10 @@ interface DbDao {
     @Delete
     suspend fun deletePill(pill: Pill)
 
+    @Query("DELETE FROM pillsTable")
+    suspend fun emptyPillsTable()
+
+    @Query("DELETE FROM doctorsTable")
+    suspend fun emptyDoctorsTable()
+
 }

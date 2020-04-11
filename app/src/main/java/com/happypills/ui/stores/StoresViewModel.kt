@@ -13,10 +13,11 @@ import com.happypills.objects.Store
 import com.happypills.util.googleplaces.VolleyService
 import org.json.JSONObject
 
-class StoresViewModel() : ViewModel(), Response.Listener<JSONObject>,
+class StoresViewModel : ViewModel(), Response.Listener<JSONObject>,
     Response.ErrorListener {
 
     val locationsList: MutableLiveData<List<Store>> = MutableLiveData()
+    val locationsError: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getData(context:Context?, it: Location) {
         context?.let { ctx ->
@@ -28,10 +29,11 @@ class StoresViewModel() : ViewModel(), Response.Listener<JSONObject>,
         locationsList.value = GsonBuilder()
             .create()
             .fromJson(response?.getJSONArray("results").toString(), Array<Store>::class.java).toList()
+        locationsError.value = true
     }
 
     override fun onErrorResponse(error: VolleyError?) {
-//        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show()
+        locationsError.value = false
     }
 
 }
